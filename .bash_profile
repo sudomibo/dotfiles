@@ -1,9 +1,9 @@
-if [[ -f ~/.profile ]]
+if [[ -r ~/.profile ]]
 then
 	source ~/.profile
 fi
 
-if [[ -f ~/.bashrc ]]
+if [[ -r ~/.bashrc ]]
 then
 	source ~/.bashrc
 fi
