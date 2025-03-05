@@ -1,0 +1,9 @@
+[user]
+	name = Mislav Bozicevic
+	email = mislav.bozicevic@suse.com
+	signingkey = 1BA5FA970BF2B0DC80686F54D5FE67058C77798E
+[commit]
+	gpgsign = true
+[tag]
+	gpgSign = true
+
