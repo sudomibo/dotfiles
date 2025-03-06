@@ -24,3 +24,6 @@ mkdir -p ~/bin
 ln -s ~/dotfiles/bin/install_dotfiles ~/bin/install_dotfiles
 ln -s ~/dotfiles/bin/di ~/bin/di
 
+mkdir -p ~/.config/osc
+ln -s ~/dotfiles/.config/osc/oscrc ~/.config/osc/oscrc
+
