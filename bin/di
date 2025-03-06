@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+declare -a PREREQS=("rpm")
+for prereq in "${PREREQS[@]}"; do
+	if ! hash "$prereq" 2>/dev/null; then
+		echo "[!] $prereq not found but required" >&2
+		exit 1
+	fi
+done
+
+if [ "$#" -ne 1 ]; then
+	echo "[!] missing search argument" >&2
+	exit 2
+fi
+
+loc=$(type -p "$1")
+if [ "$?" -ne 0 ]; then
+	echo "[-] path not found" >&2
+	exit 3
+fi
+if [ -z "$loc" ]; then
+	echo "[-] path not found" >&2
+	exit 4
+fi
+
+package=$(rpm -qf "$loc")
+if [ "$?" -ne 0 ]; then
+	echo "[-] package not found" >&2
+	exit 5
+fi
+echo "[+] found package: $package"
+

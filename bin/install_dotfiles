@@ -5,7 +5,8 @@ set -euo pipefail
 declare -a PREREQS=("git")
 for prereq in "${PREREQS[@]}"; do
 	if ! hash "$prereq" 2>/dev/null; then
-		echo "$prereq is required but missing" >&2
+		echo "[!] $prereq is required but missing" >&2
+		exit 1
 	fi
 done
 
@@ -21,4 +22,5 @@ ln -s ~/dotfiles/.tmux.conf
 
 mkdir -p ~/bin
 ln -s ~/dotfiles/bin/install_dotfiles ~/bin/install_dotfiles
+ln -s ~/dotfiles/bin/di ~/bin/di
 
