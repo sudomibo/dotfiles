@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+declare -a PREREQS=("git")
+for prereq in "${PREREQS[@]}"; do
+	if ! hash "$prereq" 2>/dev/null; then
+		echo "$prereq is required but missing" >&2
+	fi
+done
+
+cd ~
+git clone https://github.com/sudomibo/dotfiles.git
+
+ln -s ~/dotfiles/.bash_aliases
+ln -s ~/dotfiles/.bash_profile
+ln -s ~/dotfiles/.bashrc
+ln -s ~/dotfiles/.gitconfig
+ln -s ~/dotfiles/.profile
+ln -s ~/dotfiles/.tmux.conf
+
+mkdir -p ~/bin
+ln -s ~/dotfiles/bin/install_dotfiles ~/bin/install_dotfiles
+

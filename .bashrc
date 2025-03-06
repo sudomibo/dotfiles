@@ -8,7 +8,7 @@ PS1='\u@\h:\w\$ '
 
 EDITOR=/usr/bin/vi
 
-if [ -f ~/.bash_aliases ]; then
+if [ -r ~/.bash_aliases ]; then
 	source ~/.bash_aliases
 fi
 
