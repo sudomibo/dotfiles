@@ -10,3 +10,7 @@ user=mbozicevic
 sshkey=id_ed25519.pub
 credentials_mgr_class=osc.credentials.TransientCredentialsManager
 
+[https://api.opensuse.org]
+user=mbozicevic
+credentials_mgr_class=osc.credentials.TransientCredentialsManager
+
