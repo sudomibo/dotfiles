@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+declare -A map
+
+if [ "$#" -ne 1 ]; then
+	echo "[!] missing git branch name" >&2
+	exit 1
+fi
+
+map['SUSE-2024']='SUSE:ALP:Source:Standard:1.0 | SUSE:SLFO:1.1 | SUSE:SLFO:Kernel:1.0'
+map['SUSE-2025']='SUSE:SLFO:Main'
+map['SLE15-SP6']='SUSE:ALP:Source:Standard:1.0 | SUSE:SLFO:1.1 | SUSE:SLFO:Kernel:1.0 | SUSE:SLE-15-SP6:Update | SUSE:SLE-15-SP7:Update | SUSE:SLE-15-SP6:Update:Products:SLERT:Update | SUSE:SLE-15-SP7:Update:Products:SLERT:Update'
+map['SLE11-SP4-LTSS']='SUSE:SLE-11-SP4:Update'
+map['SLE12-SP2-LTSS']='SUSE:SLE-12-SP2:Update'
+map['SLE12-SP3-LTSS']='SUSE:SLE-12-SP3:Update'
+map['SLE12-SP3-TD']='SUSE:SLE-12-SP3:Update:Products:Teradata:Update'
+map['SLE12-SP4-LTSS']='SUSE:SLE-12-SP4:Update'
+map['SLE12-SP5']='SUSE:SLE-12-SP5:Update | SUSE:SLE-12-SP5:Update:Products:SLERT:Update'
+map['SLE15-LTSS']='SUSE:SLE-15:Update'
+map['SLE15-SP1-LTSS']='SUSE:SLE-15-SP1:Update'
+map['SLE15-SP2-LTSS']='SUSE:SLE-15-SP2:Update'
+map['cve/linux-5.3-LTSS']='SUSE:SLE-15-SP2:Update | SUSE:SLE-15-SP3:Update | SUSE:SLE-15-SP3:Update:Products:SLERT:Update'
+map['SLE15-SP3-LTSS']='SUSE:SLE-15-SP3:Update | SUSE:SLE-15-SP3:Update:Products:SLERT:Update'
+map['SLE15-SP4-LTSS']='SUSE:SLE-15-SP4:Update | SUSE:SLE-15-SP4:Update:Products:SLERT:Update'
+map['cve/linux-5.14-LTSS']='SUSE:SLE-15-SP4:Update | SUSE:SLE-15-SP4:Update:Products:SLERT:Update | SUSE:SLE-15-SP5:Update'
+map['SLE15-SP5-LTSS']='SUSE:SLE-15-SP5:Update'
+map['SLE15-SP7']='SUSE:SLE-15-SP7:Update | SUSE:SLE-15-SP7:Update:Products:SLERT:Update'
+map['SLE15-SP2-EB-carwos1']='SUSE:Carwos:1'
+
+if [ -v map["$1"] ]; then
+	echo "${map[$1]}"
+	exit 0
+else
+	echo "?"
+	exit 2
+fi
+

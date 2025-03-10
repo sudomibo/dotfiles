@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+declare -a PREREQS=("git" "grep" "kb2proj" "tr")
+for prereq in "${PREREQS[@]}"; do
+	if ! hash "$prereq" 2>/dev/null; then
+		echo "[!] $prereq not found but required" >&2
+		exit 1
+	fi
+done
+
+if [ $(basename $(pwd)) = "kernel" ]; then
+	branches=$(git branch -a|grep -v users|grep -v ptf)
+	PREFIX='remotes/origin/'
+	while IFS= read -r branch ; do
+		branch=$(echo "$branch" | tr -d '[:space:]')
+		info=$(kb2proj ${branch#$PREFIX})
+		if [ "$?" -eq 0 ]; then
+			echo "[+] $branch [$info]"
+		else
+			echo "[.] $branch"
+		fi
+	done <<< "$branches"
+else
+	git branch -a
+fi
+

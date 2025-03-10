@@ -23,6 +23,8 @@ ln -s ~/dotfiles/.tmux.conf
 mkdir -p ~/bin
 ln -s ~/dotfiles/bin/install_dotfiles ~/bin/install_dotfiles
 ln -s ~/dotfiles/bin/di ~/bin/di
+ln -s ~/dotfiles/bin/gitbr ~/bin/gitbr
+ln -s ~/dotfiles/bin/kb2proj ~/bin/kb2proj
 
 mkdir -p ~/.config/osc
 ln -s ~/dotfiles/.config/osc/oscrc ~/.config/osc/oscrc
