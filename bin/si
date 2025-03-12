@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+declare -a PREREQS=("grep")
+for prereq in "${PREREQS[@]}"; do
+	if ! hash "$prereq" 2>/dev/null; then
+		echo "[!] $prereq not found but required" >&2
+		exit 1
+	fi
+done
+
+if [ "$#" -ne 1 ]; then
+	echo "[!] missing search term" >&2
+	exit 2
+fi
+
+grep --color=always -C2 -rni "$1" | less -R
+

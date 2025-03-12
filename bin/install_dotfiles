@@ -25,6 +25,9 @@ ln -s ~/dotfiles/bin/install_dotfiles ~/bin/install_dotfiles
 ln -s ~/dotfiles/bin/di ~/bin/di
 ln -s ~/dotfiles/bin/gitbr ~/bin/gitbr
 ln -s ~/dotfiles/bin/kb2proj ~/bin/kb2proj
+ln -s ~/dotfiles/bin/v ~/bin/v
+ln -s ~/dotfiles/bin/s ~/bin/s
+ln -s ~/dotfiles/bin/si ~/bin/si
 
 mkdir -p ~/.config/osc
 ln -s ~/dotfiles/.config/osc/oscrc ~/.config/osc/oscrc
