@@ -22,7 +22,7 @@ case $# in
 	fi
 ;;
 *)
-	return
+	exit 2
 ;;
 esac
 
