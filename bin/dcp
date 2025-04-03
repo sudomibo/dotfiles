@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+declare -a PREREQS=("tar")
+for prereq in "${PREREQS[@]}"; do
+	if ! hash "$prereq" 2>/dev/null; then
+		echo "[!] $prereq not found but required" >&2
+		exit 1
+	fi
+done
+
+if [ "$#" -ne 2 ]; then
+	echo "[!] missing source and destination" >&2
+	exit 2
+fi
+
+if [ ! -d "$1" ]; then
+	echo "[!] source directory does not exist" >&2
+	exit 3
+fi
+
+if [ ! -d "$2" ]; then
+	echo "[!] destination directory does not exist" >&2
+	exit 4
+fi
+
+echo "[i] Starting to copy from $1 to $2..."
+(cd "$1" && tar cf - .) | (cd "$2" && tar xpf -)
+echo "[i] Done."
+

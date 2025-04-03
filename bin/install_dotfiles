@@ -28,6 +28,7 @@ ln -s ~/dotfiles/bin/kb2proj ~/bin/kb2proj
 ln -s ~/dotfiles/bin/v ~/bin/v
 ln -s ~/dotfiles/bin/s ~/bin/s
 ln -s ~/dotfiles/bin/si ~/bin/si
+ln -s ~/dotfiles/bin/dcp ~/bin/dcp
 
 mkdir -p ~/.config/osc
 ln -s ~/dotfiles/.config/osc/oscrc ~/.config/osc/oscrc
