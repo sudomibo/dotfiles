@@ -29,6 +29,7 @@ ln -s ~/dotfiles/bin/v ~/bin/v
 ln -s ~/dotfiles/bin/s ~/bin/s
 ln -s ~/dotfiles/bin/si ~/bin/si
 ln -s ~/dotfiles/bin/dcp ~/bin/dcp
+ln -s ~/dotfiles/bin/sign_key ~/bin/sign_key
 
 mkdir -p ~/.config/osc
 ln -s ~/dotfiles/.config/osc/oscrc ~/.config/osc/oscrc

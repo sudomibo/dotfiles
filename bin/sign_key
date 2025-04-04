@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+declare -a PREREQS=("gpg")
+for prereq in "${PREREQS[@]}"; do
+	if ! hash "$prereq" 2>/dev/null; then
+		echo "[!] $prereq not found but required" >&2
+		exit 1
+	fi
+done
+
+if [ "$#" -ne 1 ]; then
+	echo "[!] missing key identifier" >&2
+	exit 2
+fi
+
+gpg --keyserver hkp://keyserver.ubuntu.com --recv-keys "$1"
+if [ "$?" -ne 0 ]; then
+	echo "[!] cannot find the key with that identifier" >&2
+	exit 3
+fi
+
+gpg --sign-key "$1"
+if [ "$?" -ne 0 ]; then
+	echo "[-] problem with signing the key" >&2
+	exit 4
+fi
+
+echo "[i] exporting the key to $1.signed.asc.pgp..."
+gpg -a --export "$1" | gpg -se -r "$1" > "$1".signed.asc.pgp
+echo "[i] done."
+
