@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+case $# in
+1)
+	# default config directory, adapt to your preference, or pass it as second argument
+	CONFIGDIR="$HOME/ikconfig"
+;;
+2)
+	if [ ! -d "$2" ]; then
+		echo "[!] expected second argument to be a directory with configs" >&2
+		exit 1
+	fi
+	CONFIGDIR="$2"
+;;
+*)
+	echo "[!] incorrect arguments, expecting either just the config name, or the name and the config directory" >&2
+	exit 2
+;;
+esac
+
+if [[ ! "$1" =~ ^"CONFIG_" ]]; then
+	echo "[!] config name doesn't follow the 'CONFIG_' naming pattern..." >&2
+	exit 3
+fi
+
+cd "$CONFIGDIR"
+# script expects pairs of files that follow a naming convention in the $CONFIGDIR:
+#  1) friendly_name.config
+#  2) friendly_name.os-release
+# where 1) is the output of `zcat /proc/config.gz`, and 2) is a copy of /etc/os-release
+
+declare -A configmap
+declare -A osrmap
+
+for configfile in *.config; do
+	if [ ! -f "$configfile" ]; then
+		echo "[-] $configfile not a file, stopping" >&2
+		exit 4
+	fi
+	config=$(grep "^$1=" "$configfile")
+	if [ "$?" -eq 0 ]; then
+		configmap["${configfile%.config}"]="${config#$1=}"
+	else
+		configmap["${configfile%.config}"]="-"
+	fi
+done
+for osrfile in *.os-release; do
+	if [ ! -f "$osrfile" ]; then
+		echo "[-] $osrfile not a file, stopping" >&2
+		exit 5
+	fi
+	osr=$(grep "^PRETTY_NAME=" "$osrfile")
+	if [ "$?" -eq 0 ]; then
+		osrmap["${osrfile%.os-release}"]="${osr#PRETTY_NAME=\"}"
+	else
+		osrmap["${osrfile%.os-release}"]="${osrfile%.os-release}"
+	fi
+done
+for version in "${!configmap[@]}"; do
+	if [ -v osrmap["$version"] ]; then
+		echo "${osrmap[$version]%\"}: ${configmap[$version]}"
+	else
+		echo "$version: ${configmap[$version]}"
+	fi
+done
+
+cd - >/dev/null
+
