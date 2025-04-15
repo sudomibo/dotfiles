@@ -10,7 +10,7 @@ if [ "$#" -ne 1 ]; then
 fi
 
 map['SUSE-2024']='SUSE:ALP:Source:Standard:1.0 | SUSE:SLFO:1.1 | SUSE:SLFO:Kernel:1.0'
-map['SUSE-2025']='SUSE:SLFO:Main'
+map['SL-16.0']='SUSE:SLFO:Main'
 map['SLE15-SP6']='SUSE:ALP:Source:Standard:1.0 | SUSE:SLFO:1.1 | SUSE:SLFO:Kernel:1.0 | SUSE:SLE-15-SP6:Update | SUSE:SLE-15-SP7:Update | SUSE:SLE-15-SP6:Update:Products:SLERT:Update | SUSE:SLE-15-SP7:Update:Products:SLERT:Update'
 map['SLE11-SP4-LTSS']='SUSE:SLE-11-SP4:Update'
 map['SLE12-SP2-LTSS']='SUSE:SLE-12-SP2:Update'
