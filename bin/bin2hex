@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+declare -a PREREQS=("od" "tr" "sed")
+for prereq in "${PREREQS[@]}"; do
+	if ! hash "$prereq" 2>/dev/null; then
+		echo "[!] $prereq not found but required" >&2
+		exit 1
+	fi
+done
+
+if [ "$#" -ne 1 ]; then
+	echo "[!] missing filename of the binary to convert to hex" >&2
+	exit 2
+fi
+
+if [ ! -f "$1" ]; then
+	echo "[!] $1 does not seem to be a file" >&2
+	exit 3
+fi
+
+od -An -v -t x1 "$1" | tr -d '\n' | sed -r 's/[ ]+/\\x/g'
+
