@@ -2,7 +2,7 @@
 
 set -uo pipefail
 
-declare -a PREREQS=("grep")
+declare -a PREREQS=("grep" "basename")
 for prereq in "${PREREQS[@]}"; do
 	if ! hash "$prereq" 2>/dev/null; then
 		echo "[!] $prereq not found but required" >&2
@@ -15,5 +15,9 @@ if [ "$#" -ne 1 ]; then
 	exit 2
 fi
 
-grep --color=always -C2 -rn "$1" | less -R
+if [ $(basename $(pwd)) = "kernel" ]; then
+	grep --color=always -F -C2 -rn --include \*.c --include \*.h --include Makefile --include Kconfig "$1" | less -F -R
+else
+	grep --color=always -F -C2 -rn "$1" | less -F -R
+fi
 
