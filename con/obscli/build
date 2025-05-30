@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+declare -a PREREQS=("podman")
+for prereq in "${PREREQS[@]}"; do
+	if ! hash "$prereq" 2>/dev/null; then
+		echo "[!] $prereq not found but required" >&2
+		exit 1
+	fi
+done
+
+cp ../../.config/osc/oscrc .
+podman build . --tag obscli
+rm oscrc
+# podman run --privileged -d obscli
+# podman exec -it ID /bin/bash
+

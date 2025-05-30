@@ -3,7 +3,7 @@
 [general]
 # Default URL to the API server.
 # Credentials and other `apiurl` specific settings must be configured in a `[$apiurl]` config section.
-apiurl=https://api.suse.de
+apiurl=https://api.opensuse.org
 
 [https://api.suse.de]
 user=mbozicevic
