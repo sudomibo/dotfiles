@@ -1,0 +1,3 @@
+[bugzilla.suse.com]
+api_key=<key from https://bugzilla.suse.com/userprefs.cgi -> 'API Keys'>
+

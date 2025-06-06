@@ -37,3 +37,6 @@ ln -s ~/dotfiles/bin/text2bin ~/bin/text2bin
 mkdir -p ~/.config/osc
 ln -s ~/dotfiles/.config/osc/oscrc ~/.config/osc/oscrc
 
+mkdir -p ~/.config/python-bugzilla
+ln -s ~/dotfiles/.config/python-bugzilla/bugzillarc ~/.config/python-bugzilla/bugzillarc
+
