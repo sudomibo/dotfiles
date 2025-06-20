@@ -74,7 +74,7 @@ case "$1" in
 	echo "$result"
 ;;
 "create_rr")
-	if [ "$#" -ne 2]; then
+	if [ "$#" -ne 2	]; then
 		echo "[!] missing #UP" >&2
 		exit 3
 	fi
