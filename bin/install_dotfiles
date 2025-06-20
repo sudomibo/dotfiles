@@ -33,6 +33,7 @@ ln -s ~/dotfiles/bin/sign_key ~/bin/sign_key
 ln -s ~/dotfiles/bin/ikconfigs ~/bin/ikconfigs
 ln -s ~/dotfiles/bin/bin2hex ~/bin/bin2hex
 ln -s ~/dotfiles/bin/text2bin ~/bin/text2bin
+ln -s ~/dotfiles/bin/um ~/bin/um
 
 mkdir -p ~/.config/osc
 ln -s ~/dotfiles/.config/osc/oscrc ~/.config/osc/oscrc
