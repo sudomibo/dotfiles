@@ -15,8 +15,8 @@ case "$1" in
 		echo "[!] missing #RR" >&2
 		exit 3
 	fi
-	if [[ ! $2 =~ ^[0-9]{5}$ ]]; then
-		echo "[!] RR should be a 5-digit number" >&2
+	if [[ ! $2 =~ ^[0-9]{6}$ ]]; then
+		echo "[!] RR should be a 6-digit number" >&2
 		exit 4
 	fi
 	echo "[i] isc rq revoke -m 'new submission' $2"
