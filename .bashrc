@@ -24,3 +24,7 @@ if [ ! -f ~/.gdbinit ]; then
 	echo "set disassembly-flavor intel" > ~/.gdbinit
 fi
 
+# update history file on each command, regardless of terminal:
+shopt -s histappend
+PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
+
