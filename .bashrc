@@ -4,10 +4,10 @@ case $- in
 	  *) return;;
 esac
 
-PS1='\u@\h:\w\$ '
+PS1='M $(_rc=${?##0};echo ${_rc:+[${_rc}]}) \u@\h:\w\$ '
 
 if [ "$LC_CTYPE" = "en_US.UTF-8" ]; then
-	PS1=$'\[\033[33m\]\xf0\x9f\x9d\xab\[\033[00m\]  \u@\h:\w\$ '
+	PS1=$'\[\033[33m\]\xf0\x9f\x9d\xab\[\033[00m\] $(_rc=${?##0};echo ${_rc:+[\[\033[31m\]${_rc}\[\033[00m\]]}) \u@\h:\w\$ '
 fi
 
 EDITOR=/usr/bin/vi
