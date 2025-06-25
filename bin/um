@@ -26,6 +26,24 @@ case "$1" in
 		$isc omg pi --new "$2"
 	fi
 ;;
+"enable_chan")
+	if [ "$#" -ne 2 ]; then
+		echo "[!] missing #UP" >&2
+		exit 3
+	fi
+	if [[ ! $2 =~ ^[0-9]{5}$ ]]; then
+		echo "[!] UP should be a 5-digit number" >&2
+		exit 4
+	fi
+	echo "[i] isc enablechannel SUSE:Maintenance:$2"
+	read -p "[?] Are you sure? " -n 1 -r
+	echo
+	if [[ "$REPLY" =~ ^[yY]$ ]]; then
+		result=$($isc enablechannel SUSE:Maintenance:"$2")
+		echo "$?: $result"
+	fi
+	exit 0
+;;
 "revoke_rr")
 	if [ "$#" -ne 2 ]; then
 		echo "[!] missing #RR" >&2
@@ -76,7 +94,7 @@ case "$1" in
 		echo "$?: $result"
 	fi
 ;;
-"up_status")
+"status_up")
 	if [ "$#" -ne 2 ]; then
 		echo "[!] missing #UP" >&2
 		exit 3
