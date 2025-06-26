@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+im='secbox im'
+
+if [ "$#" -lt 1 ]; then
+	echo "[!] missing argument - CVE ID" >&2
+	exit 1
+fi
+
+if [[ ! "$1" =~ ^[Cc][Vv][Ee]-[0-9]{4}-[0-9]*$ ]]; then
+	echo "[!] not a valid CVE ID provided" >&2
+	exit 2
+fi
+
+$im api get /api/issues -s name="$1" | jq '.results[] | .severity'
+

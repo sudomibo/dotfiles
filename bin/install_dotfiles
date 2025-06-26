@@ -34,6 +34,7 @@ ln -s ~/dotfiles/bin/ikconfigs ~/bin/ikconfigs
 ln -s ~/dotfiles/bin/bin2hex ~/bin/bin2hex
 ln -s ~/dotfiles/bin/text2bin ~/bin/text2bin
 ln -s ~/dotfiles/bin/um ~/bin/um
+ln -s ~/dotfiles/bin/severity ~/bin/severity
 
 mkdir -p ~/.config/osc
 ln -s ~/dotfiles/.config/osc/oscrc ~/.config/osc/oscrc
