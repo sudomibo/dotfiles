@@ -5,14 +5,43 @@ set -uo pipefail
 im='secbox im'
 
 if [ "$#" -lt 1 ]; then
-	echo "[!] missing argument - CVE ID" >&2
+	echo "[!] missing argument - CVE or ticket ID" >&2
 	exit 1
 fi
 
-if [[ ! "$1" =~ ^[Cc][Vv][Ee]-[0-9]{4}-[0-9]*$ ]]; then
-	echo "[!] not a valid CVE ID provided" >&2
-	exit 2
-fi
+case "$1" in
+cve*|CVE*)
+	if [[ ! "$1" =~ ^[Cc][Vv][Ee]-[0-9]{4}-[0-9]{1,}$ ]]; then
+        	echo "[!] not a valid CVE ID provided" >&2
+		exit 2
+	fi
+;;
+bsc*|bnc*|boo*)
+	if [[ ! "$1" =~ ^(bsc#|bnc#|boo#)[0-9]{1,}$ ]]; then
+		echo "[!] not a valid ticket number provided" >&2
+		exit 3
+	fi
+;;
+*)
+	echo "[!] unrecognized ID for lookup" >&2
+	exit 4
+;;
+esac
 
-$im api get /api/issues -s name="$1" | jq '.results[] | .severity'
+result=$($im api get /api/issues -s name="$1")
+count=$(echo "$result" | jq ".count")
+if [ "$count" -lt 1 ]; then
+	echo "[-] no issues with the given ID found" >&2
+	exit 5
+fi
+state=$(echo "$result" | jq ".results[] | select(.name == \"$1\") | .state")
+if [ "$state" = "\"Merged\"" ]; then
+	echo "[i] issue is merged; severity possibly incorrect" >&2
+fi
+if [ "$count" -gt 1 ]; then
+	echo "[i] multiple matches ($count); severity possibly incorrect" >&2
+fi
+severity=$(echo "$result" | jq ".results[] | select(.name == \"$1\") | .severity")
+severity="${severity#\"}"
+echo "${severity%\"}"
 
