@@ -13,4 +13,4 @@ credentials_mgr_class=osc.credentials.TransientCredentialsManager
 [https://api.opensuse.org]
 user=mbozicevic
 credentials_mgr_class=osc.credentials.TransientCredentialsManager
-
+trusted_prj=openSUSE:Tumbleweed
