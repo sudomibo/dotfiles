@@ -15,7 +15,7 @@ if [ "$#" -ne 1 ]; then
 	exit 1
 fi
 
-if [[ ! "$1" =~ ^[a-zA-Z0-9_\-]{1,}$ ]]; then
+if [[ ! "$1" =~ ^[a-zA-Z0-9_.\-]{1,}$ ]]; then
 	echo "[!] are you sure the provided argument is a branch name?" >&2
 	exit 2
 fi
