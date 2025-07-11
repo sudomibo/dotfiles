@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+declare -a PREREQS=("git")
+for prereq in "${PREREQS[@]}"; do
+	if ! hash "$prereq" 2>/dev/null; then
+		echo "[!] $prereq not found but required" >&2
+		exit 1
+	fi
+done
+
+if [ "$#" -ne 1 ]; then
+	echo "[!] missing branch name to checkout and pull" >&2
+	exit 1
+fi
+
+if [[ ! "$1" =~ ^[a-zA-Z0-9_\-]{1,}$ ]]; then
+	echo "[!] are you sure the provided argument is a branch name?" >&2
+	exit 2
+fi
+
+git checkout "$1" && git pull
+
