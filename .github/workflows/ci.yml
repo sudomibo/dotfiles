@@ -1,0 +1,21 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install prereqs
+      run: |
+        sudo apt-get update
+        sudo apt-get install build-essential
+
+    - name: Build bin
+      run: |
+        cd bin
+        cc -Wall -Wextra -pedantic -o sysinfo sysinfo.c
+
