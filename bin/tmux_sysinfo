@@ -26,8 +26,16 @@ minutes=${minutes##0}
 secs=$((${si[0]}%60))
 secs=${secs##0}
 uptime="${days:+${days}d}${hours:+${hours}:}${minutes:+${minutes}:}${secs:+${secs}}"
-percfreememory=$(bc <<< "scale=2;${si[6]}/${si[5]}*100")
-percfreeswap=$(bc <<< "scale=2;${si[10]}/${si[9]}*100")
+if [ "${si[5]}" -eq 0 ]; then
+	percfreememory="N/A"
+else
+	percfreememory=$(bc <<< "scale=2;${si[6]}/${si[5]}*100")
+fi
+if [ "${si[9]}" -eq 0 ]; then
+	percfreeswap="N/A"
+else
+	percfreeswap=$(bc <<< "scale=2;${si[10]}/${si[9]}*100")
+fi
 
-echo -e "\xe2\x98\x95${uptime} \xe2\x9c\xa8${si[1]}, ${si[2]}, ${si[3]} \xf0\x9f\x8c\x8a${si[4]} \xf0\x9f\x9b\xb8${percfreememory} \xf0\x9f\x9b\xb6${percfreeswap}"
+echo -e "\xe2\x98\x95${uptime} \xe2\x9c\xa8${si[1]}, ${si[2]}, ${si[3]} \xf0\x9f\x8c\x8a${si[4]} \xf0\x9f\x9b\xb8${percfreememory}% \xf0\x9f\x9b\xb6${percfreeswap}%"
 
