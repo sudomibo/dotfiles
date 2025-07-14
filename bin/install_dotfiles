@@ -37,6 +37,7 @@ ln -s ~/dotfiles/bin/um ~/bin/um
 ln -s ~/dotfiles/bin/severity ~/bin/severity
 ln -s ~/dotfiles/bin/gitcop ~/bin/gitcop
 ln -s ~/dotfiles/bin/sysinfo ~/bin/sysinfo
+ln -s ~/dotfiles/bin/tmux_sysinfo ~/bin/tmux_sysinfo
 
 mkdir -p ~/.config/osc
 ln -s ~/dotfiles/.config/osc/oscrc ~/.config/osc/oscrc
