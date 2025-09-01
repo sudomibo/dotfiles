@@ -14,15 +14,21 @@ case $# in
 1)
 	if [ -f "$1" ]; then
 		vim "$1" -c 'syntax on|set number!|normal zt'
+	else
+		echo "[!] $1 not found or not a file" >&2
+		exit 2
 	fi
 ;;
 2)
 	if [ -f "$1" ]; then
 		vim "$1" +"$2" -c 'syntax on|set number!|normal zt'
+	else
+		echo "[!] $1 not found or not a file" >&2
+		exit 3
 	fi
 ;;
 *)
-	exit 2
+	exit 4
 ;;
 esac
 
