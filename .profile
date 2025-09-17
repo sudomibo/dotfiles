@@ -1,6 +1,6 @@
 # environment variable definitions
 
-PATH=/usr/local/bin:/usr/bin:/bin
+PATH=/usr/local/bin:/usr/bin:/sbin:/bin
 export LANG="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 export MAN_POSIXLY_CORRECT="1"
