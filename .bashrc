@@ -11,6 +11,7 @@ if [ "$LC_CTYPE" = "en_US.UTF-8" ]; then
 fi
 
 EDITOR=/usr/bin/vi
+PAGER=/usr/bin/less
 
 if [ -r ~/.bash_aliases ]; then
 	source ~/.bash_aliases
