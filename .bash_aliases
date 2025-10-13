@@ -9,4 +9,5 @@ alias qs='quilt setup'
 alias qp='quilt push -a'
 alias sec='mosh --ssh="ssh -i ~/.ssh/id_ed25519" sec-mbozicevic -- tmux new -A -s sec'
 alias fuji='mosh mibo@fuji -- tmux new -A -s fuji'
+alias pat='LC_ALL=C TZ=UTC0 diff -Naur'
 
