@@ -38,6 +38,7 @@ ln -s ~/dotfiles/bin/severity ~/bin/severity
 ln -s ~/dotfiles/bin/gitcop ~/bin/gitcop
 ln -s ~/dotfiles/bin/sysinfo ~/bin/sysinfo
 ln -s ~/dotfiles/bin/tmux_sysinfo ~/bin/tmux_sysinfo
+ln -s ~/dotfiles/bin/git-obs ~/bin/git-obs
 
 mkdir -p ~/.config
 ln -s ~/dotfiles/.config/mtk.ini ~/.config/mtk.ini
