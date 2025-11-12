@@ -25,10 +25,6 @@ if [ -r ~/.bash_aliases ]; then
 	source ~/.bash_aliases
 fi
 
-if [ ! -f ~/.vimrc ]; then
-	touch ~/.vimrc
-fi
-
 if [ ! -f ~/.gdbinit ]; then
 	echo "set disassembly-flavor intel" > ~/.gdbinit
 fi

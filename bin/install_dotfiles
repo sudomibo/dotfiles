@@ -19,6 +19,7 @@ ln -s ~/dotfiles/.bashrc
 ln -s ~/dotfiles/.gitconfig
 ln -s ~/dotfiles/.profile
 ln -s ~/dotfiles/.tmux.conf
+ln -s ~/dotfiles/.vimrc
 
 git clone https://github.com/vim/vim.git
 cd vim/src
