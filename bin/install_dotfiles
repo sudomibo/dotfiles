@@ -20,6 +20,11 @@ ln -s ~/dotfiles/.gitconfig
 ln -s ~/dotfiles/.profile
 ln -s ~/dotfiles/.tmux.conf
 
+git clone https://github.com/vim/vim.git
+cd vim/src
+make
+cd -
+
 mkdir -p ~/bin
 ln -s ~/dotfiles/bin/install_dotfiles ~/bin/install_dotfiles
 ln -s ~/dotfiles/bin/di ~/bin/di
@@ -39,6 +44,7 @@ ln -s ~/dotfiles/bin/gitcop ~/bin/gitcop
 ln -s ~/dotfiles/bin/sysinfo ~/bin/sysinfo
 ln -s ~/dotfiles/bin/tmux_sysinfo ~/bin/tmux_sysinfo
 ln -s ~/dotfiles/bin/git-obs ~/bin/git-obs
+ln -s ~/vim/src/vim ~/bin/vim
 
 mkdir -p ~/.config
 ln -s ~/dotfiles/.config/mtk.ini ~/.config/mtk.ini
