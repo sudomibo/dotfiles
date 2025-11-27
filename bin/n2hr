@@ -1,0 +1,12 @@
+#!/usr/bin/env sed -f
+s/~C/Č/g
+s/~c/č/g
+s/'C/Ć/g
+s/'c/ć/g
+s/'D/Đ/g
+s/'d/đ/g
+s/~S/Š/g
+s/~s/š/g
+s/~Z/Ž/g
+s/~z/ž/g
+
