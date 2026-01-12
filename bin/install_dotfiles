@@ -47,6 +47,7 @@ ln -s ~/dotfiles/bin/tmux_sysinfo ~/bin/tmux_sysinfo
 ln -s ~/dotfiles/bin/git-obs ~/bin/git-obs
 ln -s ~/dotfiles/bin/n2hr ~/bin/n2hr
 ln -s ~/dotfiles/bin/n2html ~/bin/n2html
+ln -s ~/dotfiles/bin/uncpio ~/bin/uncpio
 ln -s ~/vim/src/vim ~/bin/vim
 
 mkdir -p ~/.config
