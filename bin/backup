@@ -1,0 +1,128 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+declare -a PREREQS=("mktemp" "find" "touch" "sort" "tar" "gzip" "openssl" "tail")
+for prereq in "${PREREQS[@]}"; do
+	if ! hash "$prereq" 2>/dev/null; then
+		echo "[!] $prereq not found but required" >&2
+		exit 1
+	fi
+done
+
+if [ "$#" -ne 4 ]; then
+	echo "[!] missing arguments (expecting: op (start|continue) directory backup-hostname dest-port)" >&2
+	exit 2
+fi
+
+if [ ! -d "$2" ]; then
+	echo "[!] argument not a directory" >&2
+	exit 3
+fi
+
+if [[ ! "$3" =~ ^[0-9a-zA-Z\.:]{1,}$ ]]; then
+	echo "[!] not a valid hostname" >&2
+	exit 3
+fi
+
+if [[ ! "$4" =~ ^[0-9]{1,}$ ]]; then
+	echo "[!] not a valid port" >&2
+	exit 3
+fi
+
+case "$1" in
+start)
+	umask 077
+	keydir=$(mktemp -d 2>/dev/null || mktemp -d -t 'backup')
+	if [ ! -d "$keydir" ]; then
+		echo "[-] could not create a temporary directory" >&2
+		exit 4
+	fi
+	echo "[i] Key material will temporarily be stored in $keydir"
+	cd "$keydir"
+	openssl rand -hex 8 > salt
+	openssl rand -hex 60 > key
+	cd - >/dev/null
+
+	cleanup() {
+		if [ -d "$keydir" ]; then
+			echo "[i] Cleaning up $keydir... Make sure to save the contents first."
+			rm -ir "$keydir"
+		fi
+	}
+
+	trap cleanup EXIT
+;;
+continue)
+	read -p "[?] Where are the key and salt stored? " -r keydir
+	if [ ! -d "$keydir" ]; then
+		echo "[!] directory not valid" >&2
+		exit 5
+	fi
+;;
+*)
+	echo "[!] unrecognized operation (either start or continue)" >&2
+	exit 6
+;;
+esac
+
+cd "$keydir"
+declare -a KF=("salt" "key")
+for kf in "${KF[@]}"; do
+	if [ ! -r "$kf" ]; then
+		echo "[-] $kf file not readable" >&2
+		cd - >/dev/null
+		exit 7
+	fi
+done
+exec {saltfd}< salt
+exec {keyfd}< key
+exec {chksfd}> check
+cd - >/dev/null
+
+echo "[i] Connecting to peer (backup sink) $3 on port $4..."
+exec {sink}<> "/dev/tcp/$3/$4"
+
+# Protocol is simple: the peer (backup sink) upon successful connection responds with a number
+# and a newline and afterwards appends to the file whatever it receives. The number that is sent
+# to us represents the current file length so that we know what how much of the stream can be skipped.
+
+echo "[i] Waiting for peer..."
+IFS= read -u $sink -r length
+if [[ "$length" =~ ^[0-9]{1,}\n$ ]]; then
+	echo "[!] the backup host does not speak the protocol" >&2
+	exit 8
+fi
+length="${length%\n}"
+if [ "$length" -ne 0 ]; then
+	length="$(($length+1))"
+fi
+
+#find "$2" -print0 | xargs -0r touch -h -c -d 1970-01-01T00:00:00Z
+
+case "$length" in
+0)
+	echo "[i] Sending full backup..."
+;;
+*)
+	echo "[i] Sending backup from offset $length..."
+;;
+esac
+
+find "$2" -print0 | \
+	LC_ALL=C sort -z | \
+	tar --no-recursion --owner=0 --group=0 --numeric-owner --null -T - -cf - | \
+	gzip --no-name --best | \
+	openssl enc -aes-256-ctr -pbkdf2 -iter 3141592 -salt -S $(cat <&$saltfd) -pass fd:$keyfd | \
+	tee >(openssl dgst -sha256 >"/dev/fd/$chksfd") | \
+	tail -c "+$length" >"/dev/fd/$sink"
+
+exec {saltfd}<&-
+exec {keyfd}<&-
+exec {sink}<&-
+exec {chksfd}<&-
+cd "$keydir"
+echo "[+] Checksum for verification:"
+echo "$(<check)"
+cd - >/dev/null
+

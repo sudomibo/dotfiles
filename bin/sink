@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+declare -a PREREQS=("sed" "cut" "nc" "openssl")
+for prereq in "${PREREQS[@]}"; do
+	if ! hash "$prereq" 2>/dev/null; then
+		echo "[!] $prereq not found but required" >&2
+		exit 1
+	fi
+done
+
+if [ "$#" -ne 2 ]; then
+	echo "[!] missing arguments (expecting: destination-file port)" >&2
+	exit 2
+fi
+
+if [[ ! "$2" =~ ^[0-9]{1,}$ ]]; then
+	echo "[!] port number" >&2
+	exit 3
+fi
+
+file_size() {
+	if [ -f "$1" ]; then
+		filesize=$(wc -c "$1")
+		if [ "$?" -ne 0 ]; then
+			echo "[!] could not determine file size" >&2
+			exit 4
+		fi
+		filesize=$(echo "$filesize" | sed -e 's/^[ \t]*//' | cut -d ' ' -f1)
+		if [[ ! "$filesize" =~ ^[0-9]{1,}$ ]]; then
+			echo "[!] could not extract file size ($filesize)" >&2
+			exit 5
+		fi
+		echo "[i] File of size $filesize exists"
+	else
+		echo "[i] File does not exist"
+		filesize="0"
+	fi
+}
+
+file_size "$1"
+echo "[i] Listening on port $2..."
+echo "$filesize" | nc -l "$2" >> "$1"
+file_size "$1"
+echo "[i] Connection closed. Checksum for the received file:"
+openssl dgst -sha256 "$1"
+
