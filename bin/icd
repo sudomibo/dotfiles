@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+isc='secbox osc -A https://api.suse.de'
+
+if [ "$#" -ne 2 ]; then
+	echo "[!] missing codestream and package name" >&2
+	exit 1
+fi
+
+if [[ ! "$1" =~ ^[a-zA-Z0-9:\-]{1,}$ ]]; then
+	echo "[!] invalid codestream name?" >&2
+	exit 2
+fi
+
+if [[ ! "$2" =~ ^[a-zA-Z0-9\-]{1,}$ ]]; then
+	echo "[!] invalid package name?" >&2
+	exit 3
+fi
+
+$isc co "$1" "$2"
+if [ "$?" -eq 0 ]; then
+	cd "$1"
+	cd "$2"
+	echo "cd $(pwd)"
+fi
+
