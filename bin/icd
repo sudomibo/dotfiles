@@ -9,7 +9,7 @@ if [ "$#" -ne 2 ]; then
 	exit 1
 fi
 
-if [[ ! "$1" =~ ^[a-zA-Z0-9:\-]{1,}$ ]]; then
+if [[ ! "$1" =~ ^[a-zA-Z0-9:\.\-]{1,}$ ]]; then
 	echo "[!] invalid codestream name?" >&2
 	exit 2
 fi
