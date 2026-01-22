@@ -50,6 +50,7 @@ ln -s ~/dotfiles/bin/n2html ~/bin/n2html
 ln -s ~/dotfiles/bin/uncpio ~/bin/uncpio
 ln -s ~/dotfiles/bin/backup ~/bin/backup
 ln -s ~/dotfiles/bin/sink ~/bin/sink
+ln -s ~/dotfiles/bin/icd ~/bin/icd
 ln -s ~/vim/src/vim ~/bin/vim
 
 mkdir -p ~/.config
