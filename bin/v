@@ -3,12 +3,8 @@
 set -uo pipefail
 
 declare -a PREREQS=("vim" "grep" "cut")
-for prereq in "${PREREQS[@]}"; do
-	if ! hash "$prereq" 2>/dev/null; then
-		echo "[!] $prereq not found but required" >&2
-		exit 1
-	fi
-done
+declare -F requires &>/dev/null && requires || exit 1
+
 cmds="syntax on|set number!|normal zt"
 case $# in
 1)

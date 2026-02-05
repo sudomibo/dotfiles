@@ -26,6 +26,19 @@ if [ -r ~/.bash_aliases ]; then
 	source ~/.bash_aliases
 fi
 
+function requires() {
+	declare -p PREREQS &>/dev/null
+	if [ "$?" -eq 0 ]; then
+		for prereq in "${PREREQS[@]}"; do
+			if ! hash "$prereq" 2>/dev/null; then
+				echo "[!] $prereq not found but required" >&2
+				exit 1
+			fi
+		done
+	fi
+}
+export -f requires
+
 # update history file on each command, regardless of terminal:
 shopt -s histappend
 PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
