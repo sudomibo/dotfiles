@@ -12,6 +12,7 @@ fi
 
 export EDITOR=/usr/bin/vi
 export PAGER=/usr/bin/less
+export TIME_STYLE="+%Y-%m-%d %H:%M:%S %z"
 
 if [ -d ~/vim/runtime ]; then
 	export VIMRUNTIME=~/vim/runtime
