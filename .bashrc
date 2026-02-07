@@ -7,6 +7,8 @@ esac
 export EDITOR=/usr/bin/vi
 export PAGER=/usr/bin/less
 export TIME_STYLE="+%Y-%m-%d %H:%M:%S %z"
+export CLICOLOR="yes"
+export GPG_TTY=$(tty)
 
 if [ -d ~/vim/runtime ]; then
 	export VIMRUNTIME=~/vim/runtime
