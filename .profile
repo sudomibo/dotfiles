@@ -13,3 +13,7 @@ if [ -d /opt/homebrew/bin ]; then
 	export PATH=/opt/homebrew/bin/:$PATH
 fi
 
+if [ -d /usr/local/texlive/2024/bin/universal-darwin ]; then
+	export PATH=$PATH:/usr/local/texlive/2024/bin/universal-darwin
+fi
+
