@@ -41,19 +41,19 @@ function update_ps1() {
 		PS1=$'\[\033[33m\]\xf0\x9f\xa5\x95\[\033[00m\] $(_rc=${?##0};echo ${_rc:+[\[\033[31m\]${_rc}\[\033[00m\]]}) \u@\h:\w'
 	fi
 
-	if [ -d "$PWD/.git" ]; then
-		if ! hash "git" 2>/dev/null; then
-			PS1="$PS1 (git?)\n\$ "
-		else
-			local branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
-			if [ "$?" -eq 0 ]; then
-				PS1="$PS1 ($branch)\n\$ "
-			else
-				PS1="$PS1 (?)\n\$ "
-			fi
-		fi
-	else
+	if ! hash "git" 2>/dev/null; then
 		PS1="$PS1\n\$ "
+	else
+		local branch=$(git -C "$PWD" rev-parse --abbrev-ref HEAD 2>/dev/null)
+		if [ "$?" -eq 0 ]; then
+			if [ -z "$branch" ]; then
+				PS1="$PS1\n\$ "
+			else
+				PS1="$PS1 ($branch)\n\$ "
+			fi
+		else
+			PS1="$PS1 (?)\n\$ "
+		fi
 	fi
 }
 
