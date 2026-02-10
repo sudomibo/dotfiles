@@ -18,11 +18,19 @@ if [[ ! "$2" =~ ^[a-zA-Z0-9\-]{1,}$ ]]; then
 	echo "[!] invalid package name?" >&2
 	exit 3
 fi
-
-$isc co "$1" "$2"
-if [ "$?" -eq 0 ]; then
-	cd "$1"
+if [ "$1" = "SUSE:SLFO:1.2" ]; then
+	mkdir -p "SUSE:SLFO:1.2"
+	cd "SUSE:SLFO:1.2"
+	git clone "gitea@src.suse.de:pool/$2.git"
 	cd "$2"
+	git checkout "slfo-1.2"
 	echo "cd $(pwd)"
+else
+	$isc co "$1" "$2"
+	if [ "$?" -eq 0 ]; then
+		cd "$1"
+		cd "$2"
+		echo "cd $(pwd)"
+	fi
 fi
 
