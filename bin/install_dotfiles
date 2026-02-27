@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-declare -a PREREQS=("git")
+declare -a PREREQS=("git" "wget" "tar")
 for prereq in "${PREREQS[@]}"; do
 	if ! hash "$prereq" 2>/dev/null; then
 		echo "[!] $prereq is required but missing" >&2
@@ -21,10 +21,20 @@ ln -s ~/dotfiles/.profile
 ln -s ~/dotfiles/.tmux.conf
 ln -s ~/dotfiles/.vimrc
 ln -s ~/dotfiles/.gdbinit
+ln -s ~/dotfiles/.netrc
 
 git clone https://github.com/vim/vim.git
 cd vim/src
 make
+cd -
+
+wget https://curl.se/download/curl-8.18.0.tar.gz
+tar xvf curl-8.18.0.tar.gz
+mv curl-8.18.0 curl
+cd curl
+./configure --with-openssl --prefix=$HOME/fresh
+make
+make install
 cd -
 
 mkdir -p ~/bin
@@ -53,6 +63,7 @@ ln -s ~/dotfiles/bin/backup ~/bin/backup
 ln -s ~/dotfiles/bin/sink ~/bin/sink
 ln -s ~/dotfiles/bin/icd ~/bin/icd
 ln -s ~/vim/src/vim ~/bin/vim
+ln -s ~/fresh/bin/curl ~/bin/curl
 
 mkdir -p ~/.config
 ln -s ~/dotfiles/.config/mtk.ini ~/.config/mtk.ini
