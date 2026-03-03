@@ -1,0 +1,10 @@
+logins:
+- default: true
+  git_uses_http: null
+  name: ibs
+  quiet: null
+  ssh_key: null
+  token: token_with_{read user, write issue, write repository}_permissions
+  url: https://src.suse.de
+  user: mbozicevic
+
