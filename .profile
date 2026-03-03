@@ -6,7 +6,7 @@ export LC_CTYPE="en_US.UTF-8"
 export MAN_POSIXLY_CORRECT="1"
 
 if [ -d $HOME/bin ]; then
-	export PATH=$PATH:$HOME/bin
+	export PATH=$HOME/bin:$PATH
 fi
 
 if [ -d /opt/homebrew/bin ]; then
