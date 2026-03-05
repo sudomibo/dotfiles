@@ -12,4 +12,5 @@ alias sec='mosh --ssh="ssh -i ~/.ssh/id_ed25519" sec-mbozicevic2 -- tmux new -A 
 alias fuji='mosh mibo@fuji -- tmux new -A -s fuji'
 alias pat='LC_ALL=C TZ=UTC0 diff -Naur'
 alias log='journalctl -xefu'
+alias slfopr='mtk update create --prj-git-target-branch slfo-1.2' # e.g., "pool/vim#1" products/SLFO
 
