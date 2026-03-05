@@ -13,4 +13,5 @@ alias fuji='mosh mibo@fuji -- tmux new -A -s fuji'
 alias pat='LC_ALL=C TZ=UTC0 diff -Naur'
 alias log='journalctl -xefu'
 alias slfopr='mtk update create --prj-git-target-branch slfo-1.2' # e.g., "pool/vim#1" products/SLFO
+alias slfoapprove='git-obs pr review approve --reviewer maintenance-release-review' # e.g., "products/SLFO#1234"
 
