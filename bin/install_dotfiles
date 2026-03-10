@@ -23,11 +23,13 @@ ln -s ~/dotfiles/.vimrc
 ln -s ~/dotfiles/.gdbinit
 ln -s ~/dotfiles/.netrc
 
+# vim
 git clone https://github.com/vim/vim.git
 cd vim/src
 make
 cd -
 
+# curl
 wget https://curl.se/download/curl-8.18.0.tar.gz
 tar xvf curl-8.18.0.tar.gz
 mv curl-8.18.0 curl
@@ -36,6 +38,37 @@ cd curl
 make
 make install
 cd -
+
+# binutils
+cd ~/tmp
+V=2.46.0
+ARCH=x86_64 # target architecture (aarch64, mips64, etc.)
+wget -nc https://ftp.gnu.org/gnu/binutils/binutils-$V.tar.gz
+wget -nc https://ftp.gnu.org/gnu/binutils/binutils-$V.tar.gz.sig
+gpg --keyserver keys.gnupg.net --recv-keys 3A24BC1E8FB409FA9F14371813FCEF89DD9E3C4F
+gpg --verify binutils-$V.tar.gz.sig
+mkdir binutils-build
+cd binutils-build
+export AR=ar
+export AS=as
+../binutils-$V/configure \
+  --prefix=${PREFIX:-$HOME/fresh} \
+  --target=$ARCH-unknown-linux-gnu \
+  --disable-static \
+  --disable-multilib \
+  --disable-werror \
+  --disable-nls
+MAKE=gmake
+hash gmake || MAKE=make
+$MAKE -j clean all
+$MAKE install
+
+# pwntools
+git clone https://github.com/sudomibo/pwntools.git
+git checkout stable
+python3 -m venv ~/pwn
+~/pwn/bin/pip install --upgrade pip
+~/pwn/bin/pip install --upgrade ~/pwntools
 
 mkdir -p ~/bin
 ln -s ~/dotfiles/bin/install_dotfiles ~/bin/install_dotfiles
@@ -64,6 +97,7 @@ ln -s ~/dotfiles/bin/sink ~/bin/sink
 ln -s ~/dotfiles/bin/icd ~/bin/icd
 ln -s ~/vim/src/vim ~/bin/vim
 ln -s ~/fresh/bin/curl ~/bin/curl
+ln -s ~/pwn/bin/pwn ~/bin/pwn
 
 mkdir -p ~/.config
 ln -s ~/dotfiles/.config/mtk.ini ~/.config/mtk.ini
