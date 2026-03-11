@@ -20,7 +20,6 @@ ln -s ~/dotfiles/.gitconfig
 ln -s ~/dotfiles/.profile
 ln -s ~/dotfiles/.tmux.conf
 ln -s ~/dotfiles/.vimrc
-ln -s ~/dotfiles/.gdbinit
 ln -s ~/dotfiles/.netrc
 
 # vim
@@ -39,7 +38,11 @@ make
 make install
 cd -
 
+# gef
+git clone https://github.com/sudomibo/gef.git
+
 # binutils
+mkdir -p ~/tmp
 cd ~/tmp
 V=2.46.0
 ARCH=x86_64 # target architecture (aarch64, mips64, etc.)
@@ -47,6 +50,7 @@ wget -nc https://ftp.gnu.org/gnu/binutils/binutils-$V.tar.gz
 wget -nc https://ftp.gnu.org/gnu/binutils/binutils-$V.tar.gz.sig
 gpg --keyserver keys.gnupg.net --recv-keys 3A24BC1E8FB409FA9F14371813FCEF89DD9E3C4F
 gpg --verify binutils-$V.tar.gz.sig
+tar xvf binutils-$V.tar.gz
 mkdir binutils-build
 cd binutils-build
 export AR=ar
@@ -65,6 +69,7 @@ $MAKE install
 
 # pwntools
 git clone https://github.com/sudomibo/pwntools.git
+cd pwntools
 git checkout stable
 python3 -m venv ~/pwn
 ~/pwn/bin/pip install --upgrade pip
@@ -107,4 +112,7 @@ ln -s ~/dotfiles/.config/osc/oscrc ~/.config/osc/oscrc
 
 mkdir -p ~/.config/python-bugzilla
 ln -s ~/dotfiles/.config/python-bugzilla/bugzillarc ~/.config/python-bugzilla/bugzillarc
+
+mkdir -p ~/.config/gdb
+ln -s ~/dotfiles/.config/gdb/gdbinit ~/.config/gdb/gdbinit
 
