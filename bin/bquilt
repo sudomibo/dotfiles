@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+declare -a PREREQS=("bwrap" "quilt")
+declare -F requires &>/dev/null && requires || exit 1
+
+bwrap --ro-bind /bin /bin \
+	--ro-bind /lib /lib \
+	--ro-bind /usr /usr \
+	--ro-bind /etc /etc \
+	--dev /dev \
+	--proc /proc \
+	--tmpfs /tmp \
+	--tmpfs /var/tmp \
+	--bind "$PWD" "$PWD" \
+	--chdir "$PWD" \
+	--unshare-pid \
+	-- quilt "$@"
+
