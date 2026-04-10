@@ -5,6 +5,6 @@ server = bsc
 url = https://bugzilla.suse.com
 apiurl = https://apibugzilla.suse.com/xmlrpc.cgi
 user = mbozicevic
-api_key = <key from https://bugzilla.suse.com/userprefs.cgi -> 'API Keys'>
+api_key_eval = /usr/bin/gpg --no-tty -q -d ~/keys/bugzilla_api.gpg
 mail = mislav.bozicevic@suse.com
 
