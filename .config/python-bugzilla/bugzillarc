@@ -1,3 +1,10 @@
-[bugzilla.suse.com]
-api_key=<key from https://bugzilla.suse.com/userprefs.cgi -> 'API Keys'>
+[core]
+server = bsc
+
+[server.bsc]
+url = https://bugzilla.suse.com
+apiurl = https://apibugzilla.suse.com/xmlrpc.cgi
+user = mbozicevic
+api_key = <key from https://bugzilla.suse.com/userprefs.cgi -> 'API Keys'>
+mail = mislav.bozicevic@suse.com
 
