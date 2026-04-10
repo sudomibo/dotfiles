@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+declare -a PREREQS=("bwrap" "osc")
+declare -F requires &>/dev/null && requires || exit 1
+
+bwrap --ro-bind /bin /bin \
+	--ro-bind /lib /lib \
+	--ro-bind /usr /usr \
+	--ro-bind /etc /etc \
+	--dev /dev \
+	--proc /proc \
+	--ro-bind "$HOME/.local" "$HOME/.local" \
+	--bind "$HOME/.local/state" "$HOME/.local/state" \
+	--ro-bind "$HOME/tools-env" "$HOME/tools-env" \
+	--ro-bind "$HOME/dotfiles" "$HOME/dotfiles" \
+	--ro-bind "$HOME/.config/osc" "$HOME/.config/osc" \
+	--bind "$PWD" "$PWD" \
+	--chdir "$PWD" \
+	--unshare-pid \
+	-- osc "$@"
+

@@ -100,6 +100,7 @@ ln -s ~/dotfiles/bin/uncpio ~/bin/uncpio
 ln -s ~/dotfiles/bin/backup ~/bin/backup
 ln -s ~/dotfiles/bin/sink ~/bin/sink
 ln -s ~/dotfiles/bin/icd ~/bin/icd
+ln -s ~/dotfiles/bin/bosc ~/bin/bosc
 ln -s ~/vim/src/vim ~/bin/vim
 ln -s ~/fresh/bin/curl ~/bin/curl
 ln -s ~/pwn/bin/pwn ~/bin/pwn
