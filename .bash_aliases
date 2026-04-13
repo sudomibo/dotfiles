@@ -6,12 +6,15 @@ alias gitclean='git stash save --keep-index --include-untracked && git stash dro
 alias gb='gitbr|grep'
 alias objdump='objdump -M intel'
 alias kc='zcat /proc/config.gz'
-alias qs='bquilt setup -v'
-alias qp='bquilt push -a'
 alias sec='mosh --ssh="ssh -i ~/.ssh/id_ed25519" sec-mbozicevic2 -- tmux new -A -s sec'
 alias fuji='mosh mibo@fuji -- tmux new -A -s fuji'
 alias pat='LC_ALL=C TZ=UTC0 diff -Naur'
 alias log='journalctl -xefu'
 alias slfopr='mtk update create --prj-git-target-branch slfo-1.2' # e.g., "pool/vim#1" products/SLFO
 alias slfoapprove='git-obs pr review approve --reviewer maintenance-release-review' # e.g., "products/SLFO#1234"
+
+alias co='bosc co'
+alias getbins='bosc getbinaries --debuginfo openSUSE_Tumbleweed/x86_64'
+alias qs='bquilt setup -v'
+alias qp='bquilt push -a'
 
