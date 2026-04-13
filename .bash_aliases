@@ -17,4 +17,5 @@ alias co='bosc co'
 alias getbins='bosc getbinaries --debuginfo openSUSE_Tumbleweed/x86_64'
 alias qs='bquilt setup -v'
 alias qp='bquilt push -a'
+alias fresh='insect query --assignee security-team@suse.de -s NEW --summary AUDIT-0'
 
