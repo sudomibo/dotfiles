@@ -14,6 +14,7 @@ alias slfopr='mtk update create --prj-git-target-branch slfo-1.2' # e.g., "pool/
 alias slfoapprove='git-obs pr review approve --reviewer maintenance-release-review' # e.g., "products/SLFO#1234"
 
 alias co='bosc co'
+alias lsbins='bosc ls -b'
 alias getbins='bosc getbinaries --debuginfo openSUSE_Tumbleweed/x86_64'
 alias qs='bquilt setup -v'
 alias qp='bquilt push -a'
