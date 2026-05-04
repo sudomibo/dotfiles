@@ -24,5 +24,6 @@ fi
 
 echo "[i] exporting the key to $1.signed.asc.pgp..."
 gpg -a --export "$1" | gpg -se -r "$1" > "$1".signed.asc.pgp
+# alternatively: gpg --keyserver hkp://keyserver.ubuntu.com --send-keys "$1"
 echo "[i] done."
 
