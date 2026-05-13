@@ -20,3 +20,6 @@ alias qs='bquilt setup -v'
 alias qp='bquilt push -a'
 alias fresh='insect query --assignee security-team@suse.de -s NEW --summary AUDIT-0'
 
+alias kw='gpg -e -r 1BA5FA970BF2B0DC80686F54D5FE67058C77798E'
+alias ko='gpg --no-tty -q -d'
+

@@ -10,6 +10,10 @@ export TIME_STYLE="+%Y-%m-%d %H:%M:%S %z"
 export CLICOLOR="yes"
 export GPG_TTY=$(tty)
 
+if hash ssh-agent 2>/dev/null; then
+	eval $(ssh-agent -s)
+fi
+
 if [ -d ~/vim/runtime ]; then
 	export VIMRUNTIME=~/vim/runtime
 fi
