@@ -16,14 +16,6 @@ if hash ssh-agent 2>/dev/null; then
 	fi
 fi
 
-if [ -d ~/vim/runtime ]; then
-	export VIMRUNTIME=~/vim/runtime
-fi
-
-if [ -x ~/vim/src/vim ]; then
-	export EDITOR=~/vim/src/vim
-fi
-
 if [ -r ~/.bash_aliases ]; then
 	source ~/.bash_aliases
 fi

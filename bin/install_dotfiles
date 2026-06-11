@@ -23,12 +23,6 @@ ln -s ~/dotfiles/.tmux.conf
 ln -s ~/dotfiles/.vimrc
 ln -s ~/dotfiles/.netrc
 
-# vim
-git clone https://github.com/vim/vim.git
-cd vim/src
-make
-cd -
-
 # curl
 wget https://curl.se/download/curl-8.18.0.tar.gz
 tar xvf curl-8.18.0.tar.gz
@@ -103,7 +97,6 @@ ln -s ~/dotfiles/bin/sink ~/bin/sink
 ln -s ~/dotfiles/bin/icd ~/bin/icd
 ln -s ~/dotfiles/bin/bosc ~/bin/bosc
 ln -s ~/dotfiles/bin/bquilt ~/bin/bquilt
-ln -s ~/vim/src/vim ~/bin/vim
 ln -s ~/fresh/bin/curl ~/bin/curl
 ln -s ~/pwn/bin/pwn ~/bin/pwn
 
