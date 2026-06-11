@@ -11,7 +11,9 @@ export CLICOLOR="yes"
 export GPG_TTY=$(tty)
 
 if hash ssh-agent 2>/dev/null; then
-	eval $(ssh-agent -s)
+	if [ -z "$SSH_AUTH_SOCK" ]; then
+		eval $(ssh-agent -s)
+	fi
 fi
 
 if [ -d ~/vim/runtime ]; then
