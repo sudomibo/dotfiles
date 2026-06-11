@@ -1,0 +1,14 @@
+HashKnownHosts yes
+IdentityFile ~/.ssh/id_ed25519
+IdentitiesOnly yes
+AddKeysToAgent yes
+KexAlgorithms mlkem768x25519-sha256,sntrup761x25519-sha512,sntrup761x25519-sha512@openssh.com
+
+Host github.com
+	Hostname github.com
+	User git
+
+Host src.opensuse.org
+	Hostname src.opensuse.org
+	User gitea
+
