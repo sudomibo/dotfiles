@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+declare -a PREREQS=("rpm" "file" "bwrap")
+declare -F requires &>/dev/null && requires || exit 1
+
+if [ "$#" -ne 1 ]; then
+	echo "[!] missing package name argument" >&2
+	exit 2
+fi
+
+list=$(bwrap --ro-bind /bin /bin \
+	--ro-bind /usr/ /usr/ \
+	--ro-bind /lib /lib \
+	--ro-bind /lib64 /lib64 \
+	--ro-bind /etc /etc \
+	--unshare-pid \
+	-- rpm -ql "$1")
+if [ "$?" -ne 0 ]; then
+	echo "[-] package not found" >&2
+	exit 3
+fi
+
+for entry in $list; do
+	bwrap --ro-bind /bin /bin \
+		--ro-bind /usr /usr \
+		--ro-bind /lib /lib \
+		--ro-bind /lib64 /lib64 \
+		--ro-bind /etc /etc \
+		--unshare-pid \
+		-- file "$entry"
+done
+

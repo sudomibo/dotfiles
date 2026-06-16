@@ -73,6 +73,7 @@ python3 -m venv ~/pwn
 mkdir -p ~/bin
 ln -s ~/dotfiles/bin/install_dotfiles ~/bin/install_dotfiles
 ln -s ~/dotfiles/bin/di ~/bin/di
+ln -s ~/dotfiles/bin/kaj ~/bin/kaj
 ln -s ~/dotfiles/bin/gitbr ~/bin/gitbr
 ln -s ~/dotfiles/bin/kb2proj ~/bin/kb2proj
 ln -s ~/dotfiles/bin/v ~/bin/v
