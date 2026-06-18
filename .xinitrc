@@ -1,0 +1,2 @@
+exec dbus-launch --exit-with-session xfce4-session
+
