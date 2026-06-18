@@ -4,7 +4,12 @@ case $- in
 	  *) return;;
 esac
 
-export EDITOR=/usr/bin/vi
+if [ -x /usr/bin/vi ]; then
+	export EDITOR=/usr/bin/vi
+elif [ -x /bin/busybox ]; then
+	alias vi='/bin/busybox vi'
+	export EDITOR=vi
+fi
 export PAGER=/usr/bin/less
 export TIME_STYLE="+%Y-%m-%d %H:%M:%S %z"
 export CLICOLOR="yes"
