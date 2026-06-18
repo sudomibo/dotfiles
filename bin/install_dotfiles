@@ -23,16 +23,6 @@ ln -s ~/dotfiles/.tmux.conf
 ln -s ~/dotfiles/.vimrc
 ln -s ~/dotfiles/.netrc
 
-# curl
-wget https://curl.se/download/curl-8.18.0.tar.gz
-tar xvf curl-8.18.0.tar.gz
-mv curl-8.18.0 curl
-cd curl
-./configure --with-openssl --prefix=$HOME/fresh
-make
-make install
-cd -
-
 # gef
 git clone https://github.com/sudomibo/gef.git
 
@@ -98,7 +88,7 @@ ln -s ~/dotfiles/bin/sink ~/bin/sink
 ln -s ~/dotfiles/bin/icd ~/bin/icd
 ln -s ~/dotfiles/bin/bosc ~/bin/bosc
 ln -s ~/dotfiles/bin/bquilt ~/bin/bquilt
-ln -s ~/fresh/bin/curl ~/bin/curl
+ln -s ~/dotfiles/bin/hrom ~/bin/hrom
 ln -s ~/pwn/bin/pwn ~/bin/pwn
 
 mkdir -p ~/.config
