@@ -23,3 +23,5 @@ alias fresh='insect query --assignee security-team@suse.de -s NEW --summary AUDI
 alias kw='gpg -e -r 1BA5FA970BF2B0DC80686F54D5FE67058C77798E'
 alias ko='gpg --no-tty -q -d'
 
+alias certinfo='while openssl x509 -noout -text; do :; done <' # e.g., certinfo cert.pem
+
