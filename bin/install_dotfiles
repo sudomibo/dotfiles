@@ -89,6 +89,7 @@ ln -s ~/dotfiles/bin/icd ~/bin/icd
 ln -s ~/dotfiles/bin/bosc ~/bin/bosc
 ln -s ~/dotfiles/bin/bquilt ~/bin/bquilt
 ln -s ~/dotfiles/bin/bctags ~/bin/bctags
+ln -s ~/dotfiles/bin/bvim ~/bin/bvim
 ln -s ~/dotfiles/bin/hrom ~/bin/hrom
 ln -s ~/pwn/bin/pwn ~/bin/pwn
 

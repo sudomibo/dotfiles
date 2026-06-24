@@ -2,14 +2,14 @@
 
 set -uo pipefail
 
-declare -a PREREQS=("vim" "grep" "cut")
+declare -a PREREQS=("bvim" "grep" "cut")
 declare -F requires &>/dev/null && requires || exit 1
 
 cmds="syntax on|set number!|normal zt"
 case $# in
 1)
 	if [ -f "$1" ]; then
-		vim -R "$1" -c '"$cmds"'
+		bvim -R "$1" -c '"$cmds"'
 	else
 		echo "[!] $1 not found or not a file" >&2
 		exit 2
@@ -18,14 +18,14 @@ case $# in
 2)
 	if [ -f "$1" ]; then
 		if [[ "$2" =~ ^[0-9]{1,}$ ]]; then
-			vim -R "$1" +"$2" -c '"$cmds"'
+			bvim -R "$1" +"$2" -c '"$cmds"'
 		else
 			location=$(grep -m 1 -n "$2" $1)
 			if [ "$?" -eq 0 ]; then
 				location=$(echo -n "$location" | cut -d':' -f1)
-				vim -R "$1" +"$location" -c '"$cmds"'
+				bvim -R "$1" +"$location" -c '"$cmds"'
 			else
-				vim -R "$1" -c '"$cmds"'
+				bvim -R "$1" -c '"$cmds"'
 			fi
 		fi
 	else

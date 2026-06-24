@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+declare -a PREREQS=("bwrap" "vim")
+declare -F requires &>/dev/null && requires || exit 1
+
+if [ ! -e "$HOME/.vimrc" ]; then
+	touch "$HOME/.vimrc"
+fi
+
+if [ -e /usr/lib64 ]; then
+	bwrap --symlink usr/lib /lib \
+		--symlink usr/bin /bin \
+		--symlink usr/bin /sbin \
+		--symlink usr/lib64 /lib64 \
+		--ro-bind /usr/lib /usr/lib \
+		--ro-bind /usr/lib64 /usr/lib64 \
+		--ro-bind /usr/bin /usr/bin \
+		--ro-bind /usr/share /usr/share \
+		--ro-bind /etc /etc \
+		--ro-bind /sys/fs /sys/fs \
+		--ro-bind "$HOME/.vimrc" "$HOME/.vimrc" \
+		--dev /dev \
+		--proc /proc \
+		--tmpfs /tmp \
+		--ro-bind "$PWD" "$PWD" \
+		--chdir "$PWD" \
+		--unshare-pid \
+		--unshare-net \
+		-- vim "$@"
+else
+		# TODO
+		vim "$@"
+fi
+
