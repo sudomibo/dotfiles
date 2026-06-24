@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+declare -a PREREQS=("bwrap" "ctags")
+declare -F requires &>/dev/null && requires || exit 1
+
+if [ ! -d "$HOME/.config/ctags" ]; then
+	mkdir -v -p "$HOME/.config/ctags"
+fi
+
+bwrap --symlink usr/lib /lib \
+	--symlink usr/bin /bin \
+	--symlink usr/bin /sbin \
+	--symlink usr/lib64 /lib64 \
+	--ro-bind /usr/lib /usr/lib \
+	--ro-bind /usr/lib64 /usr/lib64 \
+	--ro-bind /usr/bin /usr/bin \
+	--ro-bind /usr/share /usr/share \
+	--ro-bind /etc /etc \
+	--ro-bind "$HOME/.config/ctags" "$HOME/.config/ctags" \
+	--dev /dev \
+	--proc /proc \
+	--tmpfs /tmp \
+	--bind "$PWD" "$PWD" \
+	--chdir "$PWD" \
+	--unshare-pid \
+	-- ctags "$@"
+
