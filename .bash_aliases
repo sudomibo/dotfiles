@@ -25,3 +25,5 @@ alias ko='gpg --no-tty -q -d'
 
 alias certinfo='while openssl x509 -noout -text; do :; done <' # e.g., certinfo cert.pem
 
+alias rpmls='rpm -q --queryformat "%{NAME} %{VERSION} RPMv%{RPMVERSION}\\n[%{FILEMODES:perms} %8{FILEUSERNAME}%8{FILEGROUPNAME} %3{FILEFLAGS:fflags} (%2{FILEFLAGS:hex}) %9{FILEVERIFYFLAGS:vflags} (%8{FILEVERIFYFLAGS:hex}) %{FILECAPS} %{FILENAMES}\\n]"'
+
