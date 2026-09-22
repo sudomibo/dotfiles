@@ -1,0 +1,29 @@
+set realname = "Mislav Bozicevic"
+set from = "mbozicevic@suse.de"
+
+# In
+set mbox_type = Maildir
+set folder = ~/mail/suse.de
+set spoolfile = "+INBOX"
+set postponed = "+Drafts"
+set record = "+Sent"
+set trash = "+Trash"
+
+# Out
+set sendmail = /usr/bin/msmtp
+set use_from = yes
+set envelope_from = yes
+
+# GPG settings
+set pgp_sign_as = 1BA5FA970BF2B0DC80686F54D5FE67058C77798E
+set crypt_use_gpgme = yes
+set crypt_autosign = yes
+set crypt_verify_sig = yes
+set crypt_replysign = yes
+set crypt_replyencrypt = yes
+set crypt_replysignencrypted = yes
+
+# UI
+set sort = 'reverse-date'
+macro index S "<shell-escape>mbsync -V -a<enter>" "sync emails"
+

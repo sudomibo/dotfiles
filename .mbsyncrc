@@ -1,0 +1,29 @@
+IMAPAccount suse.de
+Host imap.suse.de
+User username
+# gpg -e -r 1BA5FA970BF2B0DC80686F54D5FE67058C77798E imap.suse.de
+PassCmd "/usr/bin/gpg --no-tty -q -d ~/keys/imap.suse.de.gpg"
+SSLType IMAPS
+Timeout 180
+SystemCertificates no
+# curl -w %{certs} imaps://imap.suse.de > ~/imap.suse.de
+CertificateFile ~/imap.suse.de
+
+IMAPStore suse.de-remote
+Account suse.de
+
+# mkdir -p ~/mail/suse.de
+MaildirStore suse.de-local
+SubFolders Verbatim
+Path ~/mail/suse.de/
+Inbox ~/mail/suse.de/INBOX
+
+Channel suse.de
+Far :suse.de-remote:
+Near :suse.de-local:
+Patterns *
+Create Both
+Remove Both
+Expunge Both
+SyncState *
+
