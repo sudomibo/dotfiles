@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+declare -a PREREQS=("rpm2cpio" "cpio")
+declare -F requires &>/dev/null && requires || exit 1
+
+if [ "$#" -ne 1 ]; then
+        echo "[!] missing RPM name" >&2
+        exit 2
+fi
+
+if [ ! -f "$1" ]; then
+        echo "[!] RPM not found" >&2
+        exit 3
+fi
+
+rpm2cpio "$1" | cpio -idmv
+
