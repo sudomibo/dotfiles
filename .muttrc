@@ -13,6 +13,7 @@ set trash = "+Trash"
 set sendmail = /usr/bin/msmtp
 set use_from = yes
 set envelope_from = yes
+set signature = ~/.signature
 
 # GPG settings
 set pgp_sign_as = 1BA5FA970BF2B0DC80686F54D5FE67058C77798E
