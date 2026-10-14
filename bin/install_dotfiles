@@ -13,15 +13,16 @@ done
 cd ~
 git clone https://github.com/sudomibo/dotfiles.git
 
-ln -s ~/dotfiles/.bash_aliases
-ln -s ~/dotfiles/.bash_profile
-ln -s ~/dotfiles/.bashrc
-ln -s ~/dotfiles/.bash_logout
-ln -s ~/dotfiles/.gitconfig
-ln -s ~/dotfiles/.profile
-ln -s ~/dotfiles/.tmux.conf
-ln -s ~/dotfiles/.vimrc
-ln -s ~/dotfiles/.netrc
+ln ~/dotfiles/.bash_aliases
+ln ~/dotfiles/.bash_profile
+ln ~/dotfiles/.bashrc
+ln ~/dotfiles/.bash_logout
+ln ~/dotfiles/.gitconfig
+ln ~/dotfiles/.profile
+ln ~/dotfiles/.tmux.conf
+ln ~/dotfiles/.vimrc
+mkdir -p ~/.vim
+ln -s ~/dotfiles/bin
 
 # gef
 git clone https://github.com/sudomibo/gef.git
@@ -59,39 +60,6 @@ git checkout stable
 python3 -m venv ~/pwn
 ~/pwn/bin/pip install --upgrade pip
 ~/pwn/bin/pip install --upgrade ~/pwntools
-
-mkdir -p ~/bin
-ln -s ~/dotfiles/bin/install_dotfiles ~/bin/install_dotfiles
-ln -s ~/dotfiles/bin/di ~/bin/di
-ln -s ~/dotfiles/bin/kaj ~/bin/kaj
-ln -s ~/dotfiles/bin/gitbr ~/bin/gitbr
-ln -s ~/dotfiles/bin/kb2proj ~/bin/kb2proj
-ln -s ~/dotfiles/bin/v ~/bin/v
-ln -s ~/dotfiles/bin/s ~/bin/s
-ln -s ~/dotfiles/bin/si ~/bin/si
-ln -s ~/dotfiles/bin/dcp ~/bin/dcp
-ln -s ~/dotfiles/bin/sign_key ~/bin/sign_key
-ln -s ~/dotfiles/bin/ikconfigs ~/bin/ikconfigs
-ln -s ~/dotfiles/bin/bin2hex ~/bin/bin2hex
-ln -s ~/dotfiles/bin/text2bin ~/bin/text2bin
-ln -s ~/dotfiles/bin/um ~/bin/um
-ln -s ~/dotfiles/bin/severity ~/bin/severity
-ln -s ~/dotfiles/bin/gitcop ~/bin/gitcop
-ln -s ~/dotfiles/bin/sysinfo ~/bin/sysinfo
-ln -s ~/dotfiles/bin/tmux_sysinfo ~/bin/tmux_sysinfo
-ln -s ~/dotfiles/bin/git-obs ~/bin/git-obs
-ln -s ~/dotfiles/bin/n2hr ~/bin/n2hr
-ln -s ~/dotfiles/bin/n2html ~/bin/n2html
-ln -s ~/dotfiles/bin/uncpio ~/bin/uncpio
-ln -s ~/dotfiles/bin/backup ~/bin/backup
-ln -s ~/dotfiles/bin/sink ~/bin/sink
-ln -s ~/dotfiles/bin/icd ~/bin/icd
-ln -s ~/dotfiles/bin/bosc ~/bin/bosc
-ln -s ~/dotfiles/bin/bquilt ~/bin/bquilt
-ln -s ~/dotfiles/bin/bctags ~/bin/bctags
-ln -s ~/dotfiles/bin/bvim ~/bin/bvim
-ln -s ~/dotfiles/bin/hrom ~/bin/hrom
-ln -s ~/pwn/bin/pwn ~/bin/pwn
 
 mkdir -p ~/.config
 ln -s ~/dotfiles/.config/mtk.ini ~/.config/mtk.ini
