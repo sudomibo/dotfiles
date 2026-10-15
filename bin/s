@@ -13,6 +13,6 @@ fi
 if [ $(basename $(pwd)) = "kernel" ]; then
 	grep --color=always -F -C 3 -r -n --include \*.c --include \*.h --include Makefile --include Kconfig "$1" . | less -F -R
 else
-	grep --color=always -F -C 3 -r -n "$1" . | less -F -R
+	grep --color=always -F -C 3 -r -n --exclude tags "$1" . | less -F -R
 fi
 
